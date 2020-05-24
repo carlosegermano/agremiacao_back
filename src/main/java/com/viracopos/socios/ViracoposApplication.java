@@ -38,25 +38,24 @@ public class ViracoposApplication implements CommandLineRunner {
 		
 		estadoRepository.save(uf);
 		
-		Cidade cid = new Cidade(1, "Rio Tinto", uf);
+		Cidade cid1 = new Cidade(1, "Rio Tinto", uf);
+		Cidade cid2 = new Cidade(2, "Mamanguape", uf);
 		
-		cidadeRepository.save(cid);
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2));
 		
-		Socio s1 = new Socio(null, "Emerson Felipe", "20/04/1982", "emerson@gmail.com", cid, "São Paulo", 14, "10/01/1997", null);
-		Socio s2 = new Socio(null, "Wellington Campos", "10/05/1985", "wellington@gmail.com", cid, "Fluminense", 1, "16/05/2000", null);
-		Socio s3 = new Socio(null, "Tarcizo Junior", "20/08/1981", "tarcizo@gmail.com", cid, "Flamengo", 5, "11/06/2000", null);
-		Socio s4 = new Socio(null, "Franklin", "21/05/1982", "franklin@gmail.com", cid, "Flamengo", 99, "10/01/2010", null);
-		Socio s5 = new Socio(null, "Carlos Eduardo", "25/03/1981", "eduardo@gmail.com", cid, "Flamengo", 8, "10/01/2018", null);
-		Socio s6 = new Socio(null, "Carlos Eduardo", "25/03/1981", "eduardo@gmail.com", cid, "Flamengo", 8, "10/01/2018", null);
+		Socio s1 = new Socio(null, "Emerson Felipe", "20/04/1982", "emerson@gmail.com", "São Paulo", 14, "10/01/1997", null);
+		Socio s2 = new Socio(null, "Wellington Campos", "10/05/1985", "wellington@gmail.com", "Fluminense", 1, "16/05/2000", null);
+		Socio s3 = new Socio(null, "Tarcizo Junior", "20/08/1981", "tarcizo@gmail.com", "Flamengo", 5, "11/06/2000", null);
+		Socio s4 = new Socio(null, "Franklin", "21/05/1982", "franklin@gmail.com", "Flamengo", 99, "10/01/2010", null);
+		Socio s5 = new Socio(null, "Carlos Eduardo", "25/03/1981", "eduardo@gmail.com", "Flamengo", 8, "10/01/2018", null);
 		
-		s1.setCidade(cid);
-		s2.setCidade(cid);
-		s3.setCidade(cid);
-		s4.setCidade(cid);
-		s5.setCidade(cid);
-		s6.setCidade(cid);
+		s1.setCidade(cid1);
+		s2.setCidade(cid1);
+		s3.setCidade(cid1);
+		s4.setCidade(cid1);
+		s5.setCidade(cid1);
 		
-		socioRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6));
+		socioRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5));
 		
 		
 	}

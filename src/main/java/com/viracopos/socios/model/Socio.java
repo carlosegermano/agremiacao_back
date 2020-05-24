@@ -38,14 +38,13 @@ public class Socio implements Serializable {
 	
 	public Socio() {}
 
-	public Socio(Integer id, String nome, String dataNascimento, String email, Cidade cidade, String timeQueTorce,
+	public Socio(Integer id, String nome, String dataNascimento, String email, String timeQueTorce,
 			Integer numeroDaCamisa, String dataDaAssociacao, String status) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
-		this.cidade = cidade;
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
