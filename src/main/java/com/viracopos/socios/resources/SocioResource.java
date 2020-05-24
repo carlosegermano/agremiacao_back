@@ -1,0 +1,43 @@
+package com.viracopos.socios.resources;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.viracopos.socios.dto.SocioDTO;
+import com.viracopos.socios.model.Socio;
+import com.viracopos.socios.service.SocioService;
+
+@RestController
+@RequestMapping(value = "/socios")
+public class SocioResource {
+
+	@Autowired
+	private SocioService socioService;
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Socio> find(@PathVariable Integer id) {
+		Socio obj = socioService.find(id);
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<SocioDTO>> findAll() {
+		List<Socio> socios = socioService.findAll();
+		List<SocioDTO> sociosDTO = socios.stream().map(
+				s -> new SocioDTO(s)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(sociosDTO);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		socioService.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
+}
