@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.viracopos.socios.model.Cidade;
 import com.viracopos.socios.model.Estado;
 import com.viracopos.socios.model.Socio;
+import com.viracopos.socios.model.enums.PerfilSocio;
 import com.viracopos.socios.repository.CidadeRepository;
 import com.viracopos.socios.repository.EstadoRepository;
 import com.viracopos.socios.repository.SocioRepository;
@@ -48,6 +49,9 @@ public class DBService {
 		Socio s4 = new Socio(null, "Franklin", "21/05/1982", "franklin@gmail.com", "Flamengo", 99, "10/01/2010", "Ativo", pe.encode("123"));
 		Socio s5 = new Socio(null, "Carlos Eduardo", "25/03/1981", "eduardo@gmail.com", "Flamengo", 8, "10/01/2018",
 				"Ativo", pe.encode("123"));
+		
+		s1.addPerfil(PerfilSocio.ADMIN);
+		s5.addPerfil(PerfilSocio.ADMIN);
 
 		s1.setCidade(cid1);
 		s2.setCidade(cid1);

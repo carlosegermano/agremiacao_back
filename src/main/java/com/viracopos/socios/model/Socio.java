@@ -1,9 +1,15 @@
 package com.viracopos.socios.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.viracopos.socios.model.enums.PerfilSocio;
 
 
 @Entity
@@ -45,7 +52,13 @@ public class Socio implements Serializable {
 	@JsonIgnore
 	private String senha;
 	
-	public Socio() {}
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
+	public Socio() {
+		addPerfil(PerfilSocio.SOCIO);
+	}
 
 	public Socio(Integer id, String nome, String dataNascimento, String email, String timeQueTorce,
 			Integer numeroDaCamisa, String dataDaAssociacao, String status, String senha) {
@@ -59,6 +72,7 @@ public class Socio implements Serializable {
 		this.dataDaAssociacao = dataDaAssociacao;
 		this.status = status;
 		this.senha = senha;
+		addPerfil(PerfilSocio.SOCIO);
 	}
 
 	public Integer getId() {
@@ -139,6 +153,14 @@ public class Socio implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public Set<PerfilSocio> getPerfis() {
+		return perfis.stream().map(x -> PerfilSocio.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil(PerfilSocio perfil) {
+		perfis.add(perfil.getCod());
 	}
 	
 	@Override
