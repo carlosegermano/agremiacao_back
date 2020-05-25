@@ -48,7 +48,7 @@ public class Socio implements Serializable {
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = "Ativo";
+		this.status = status;
 	}
 
 	public Integer getId() {

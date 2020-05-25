@@ -5,16 +5,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.viracopos.socios.dto.SocioDTO;
 import com.viracopos.socios.dto.SocioNewDTO;
+import com.viracopos.socios.dto.SocioUpDTO;
 import com.viracopos.socios.model.Socio;
 import com.viracopos.socios.service.SocioService;
 
@@ -39,6 +42,17 @@ public class SocioResource {
 		return ResponseEntity.ok().body(sociosDTO);
 	}
 	
+	@RequestMapping(value = "page", method = RequestMethod.GET)
+	public ResponseEntity<Page<SocioDTO>> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+		Page<Socio> list = socioService.findPage(page, linesPerPage, orderBy, direction);
+		Page<SocioDTO> listDto = list.map(obj -> new SocioDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		socioService.deleteById(id);
@@ -51,5 +65,13 @@ public class SocioResource {
 		obj = socioService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody SocioUpDTO objDto, @PathVariable Integer id) {
+		Socio obj = socioService.fromDTO(objDto);
+		obj.setId(id);
+		obj = socioService.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 }

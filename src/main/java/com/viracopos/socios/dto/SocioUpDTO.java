@@ -2,10 +2,12 @@ package com.viracopos.socios.dto;
 
 import java.io.Serializable;
 
-public class SocioNewDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+import com.viracopos.socios.model.Socio;
 
+public class SocioUpDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
 	private String nome;
 	private String dataNascimento;
 	private String email;
@@ -14,25 +16,27 @@ public class SocioNewDTO implements Serializable {
 	private String dataDaAssociacao;
 	private String status;
 	
-	private Integer cidadeId;
+	public SocioUpDTO() {}
 	
-	public SocioNewDTO() {
-	}
-	
-	public SocioNewDTO(String nome, String dataNascimento, String email, String timeQueTorce, Integer numeroDaCamisa,
-			String dataDaAssociacao, String status, Integer cidadeId) {
+	public SocioUpDTO(Socio socio) {
 		super();
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
-		this.email = email;
-		this.timeQueTorce = timeQueTorce;
-		this.numeroDaCamisa = numeroDaCamisa;
-		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = status;
-		this.cidadeId = cidadeId;
+		this.id = socio.getId();
+		this.nome = socio.getNome();
+		this.dataNascimento = socio.getDataNascimento();
+		this.email = socio.getEmail();
+		this.timeQueTorce = socio.getTimeQueTorce();
+		this.numeroDaCamisa = socio.getNumeroDaCamisa();
+		this.dataDaAssociacao = socio.getDataDaAssociacao();
+		this.status = socio.getStatus();
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -57,7 +61,7 @@ public class SocioNewDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public String getTimeQueTorce() {
 		return timeQueTorce;
 	}
@@ -89,13 +93,5 @@ public class SocioNewDTO implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public Integer getCidadeId() {
-		return cidadeId;
-	}
-
-	public void setCidadeId(Integer cidadeId) {
-		this.cidadeId = cidadeId;
-	}
-
+	
 }

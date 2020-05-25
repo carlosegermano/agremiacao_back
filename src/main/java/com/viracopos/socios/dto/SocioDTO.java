@@ -20,7 +20,7 @@ public class SocioDTO implements Serializable {
 		this.id = socio.getId();
 		this.nome = socio.getNome();
 		this.cidade = socio.getCidade();
-		this.setStatus(socio.getStatus());
+		this.status = socio.getStatus();
 	}
 
 	public Integer getId() {
