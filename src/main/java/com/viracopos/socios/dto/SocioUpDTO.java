@@ -15,6 +15,7 @@ public class SocioUpDTO implements Serializable {
 	private Integer numeroDaCamisa;
 	private String dataDaAssociacao;
 	private String status;
+	private String senha;
 	
 	public SocioUpDTO() {}
 	
@@ -92,6 +93,14 @@ public class SocioUpDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 }

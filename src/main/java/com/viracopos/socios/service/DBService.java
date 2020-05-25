@@ -3,6 +3,7 @@ package com.viracopos.socios.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.viracopos.socios.model.Cidade;
@@ -24,6 +25,9 @@ public class DBService {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	public void instantiateTestDatabase() {
 		
 		Estado uf = new Estado(null, "Paraíba");
@@ -36,14 +40,14 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(cid1, cid2));
 
 		Socio s1 = new Socio(null, "Emerson Felipe", "20/04/1982", "emerson@gmail.com", "São Paulo", 14, "10/01/1997",
-				"Ativo");
+				"Ativo", pe.encode("123"));
 		Socio s2 = new Socio(null, "Wellington Campos", "10/05/1985", "wellington@gmail.com", "Fluminense", 1,
-				"16/05/2000", "Ativo");
+				"16/05/2000", "Ativo", pe.encode("123"));
 		Socio s3 = new Socio(null, "Tarcizo Junior", "20/08/1981", "tarcizo@gmail.com", "Flamengo", 5, "11/06/2000",
-				"Ativo");
-		Socio s4 = new Socio(null, "Franklin", "21/05/1982", "franklin@gmail.com", "Flamengo", 99, "10/01/2010", "Ativo");
+				"Ativo", pe.encode("123"));
+		Socio s4 = new Socio(null, "Franklin", "21/05/1982", "franklin@gmail.com", "Flamengo", 99, "10/01/2010", "Ativo", pe.encode("123"));
 		Socio s5 = new Socio(null, "Carlos Eduardo", "25/03/1981", "eduardo@gmail.com", "Flamengo", 8, "10/01/2018",
-				"Ativo");
+				"Ativo", pe.encode("123"));
 
 		s1.setCidade(cid1);
 		s2.setCidade(cid1);

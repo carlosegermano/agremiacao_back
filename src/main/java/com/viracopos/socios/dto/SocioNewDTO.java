@@ -2,18 +2,35 @@ package com.viracopos.socios.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 public class SocioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataNascimento;
+	
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String timeQueTorce;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Integer numeroDaCamisa;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataDaAssociacao;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String status;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	private String senha;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Integer cidadeId;
 	
 	public SocioNewDTO() {
@@ -90,6 +107,14 @@ public class SocioNewDTO implements Serializable {
 		this.status = status;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 	public Integer getCidadeId() {
 		return cidadeId;
 	}

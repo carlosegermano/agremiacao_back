@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Socio implements Serializable {
@@ -40,10 +42,13 @@ public class Socio implements Serializable {
 	
 	private String status;
 	
+	@JsonIgnore
+	private String senha;
+	
 	public Socio() {}
 
 	public Socio(Integer id, String nome, String dataNascimento, String email, String timeQueTorce,
-			Integer numeroDaCamisa, String dataDaAssociacao, String status) {
+			Integer numeroDaCamisa, String dataDaAssociacao, String status, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,6 +58,7 @@ public class Socio implements Serializable {
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
 		this.status = status;
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -127,6 +133,14 @@ public class Socio implements Serializable {
 		this.status = status;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -143,5 +157,5 @@ public class Socio implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

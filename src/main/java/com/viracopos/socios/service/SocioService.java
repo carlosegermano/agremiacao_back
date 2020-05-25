@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.viracopos.socios.dto.SocioNewDTO;
@@ -25,6 +26,9 @@ public class SocioService {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Socio find(Integer id) {
 		Optional<Socio> obj = socioRepository.findById(id);
@@ -59,7 +63,7 @@ public class SocioService {
 	public Socio fromDTO(SocioNewDTO objDto) {
 		Socio socio = new Socio(null, objDto.getNome(), objDto.getDataNascimento(),
 				objDto.getEmail(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
-				objDto.getDataDaAssociacao(), objDto.getStatus());
+				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
 		Cidade cidade = cidadeRepository.getOne(objDto.getCidadeId());
 		socio.setCidade(cidade);
 		return socio;
@@ -68,7 +72,7 @@ public class SocioService {
 	public Socio fromDTO(SocioUpDTO objDto) {
 		return new Socio(objDto.getId(), objDto.getNome(), objDto.getDataNascimento(),
 				objDto.getEmail(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
-				objDto.getDataDaAssociacao(), objDto.getStatus());
+				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
 	}
 	
 	private void updateData(Socio newObj, Socio obj) {
