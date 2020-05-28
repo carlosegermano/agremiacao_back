@@ -62,7 +62,7 @@ public class SocioService {
 
 	public Socio fromDTO(SocioNewDTO objDto) {
 		Socio socio = new Socio(null, objDto.getNome(), objDto.getDataNascimento(),
-				objDto.getEmail(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
+				objDto.getUsuario(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
 				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
 		Cidade cidade = cidadeRepository.getOne(objDto.getCidadeId());
 		socio.setCidade(cidade);
@@ -71,14 +71,14 @@ public class SocioService {
 	
 	public Socio fromDTO(SocioUpDTO objDto) {
 		return new Socio(objDto.getId(), objDto.getNome(), objDto.getDataNascimento(),
-				objDto.getEmail(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
+				objDto.getUsuario(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
 				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
 	}
 	
 	private void updateData(Socio newObj, Socio obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setDataNascimento(obj.getDataNascimento());
-		newObj.setEmail(obj.getEmail());
+		newObj.setUsuario(obj.getUsuario());
 		newObj.setTimeQueTorce(obj.getTimeQueTorce());
 		newObj.setNumeroDaCamisa(obj.getNumeroDaCamisa());
 		newObj.setDataDaAssociacao(obj.getDataDaAssociacao());

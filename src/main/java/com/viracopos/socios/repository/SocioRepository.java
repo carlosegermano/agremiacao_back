@@ -8,4 +8,6 @@ import com.viracopos.socios.model.Socio;
 @Repository
 public interface SocioRepository extends JpaRepository<Socio, Integer> {
 	
+	public Socio findByUsuario(String usuario);
+	
 }

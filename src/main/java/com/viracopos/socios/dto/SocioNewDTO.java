@@ -4,16 +4,21 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 public class SocioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min=5, max=120, message = "O nome deve possuir entre 5 e 120 caracteres!")
 	private String nome;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataNascimento;
 	
-	private String email;
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min=4, max=12, message = "O nome de usuario deve possuir entre 4 e 12 caracteres!")
+	private String usuario;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String timeQueTorce;
@@ -24,7 +29,6 @@ public class SocioNewDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataDaAssociacao;
 	
-	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String status;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
@@ -36,16 +40,17 @@ public class SocioNewDTO implements Serializable {
 	public SocioNewDTO() {
 	}
 	
-	public SocioNewDTO(String nome, String dataNascimento, String email, String timeQueTorce, Integer numeroDaCamisa,
-			String dataDaAssociacao, String status, Integer cidadeId) {
+	public SocioNewDTO(String nome, String dataNascimento, String usuario, String timeQueTorce, Integer numeroDaCamisa,
+			String dataDaAssociacao, String senha, Integer cidadeId) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.email = email;
+		this.usuario = usuario;
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = status;
+		this.status = "Ativo";
+		this.senha = senha;
 		this.cidadeId = cidadeId;
 	}
 
@@ -67,12 +72,12 @@ public class SocioNewDTO implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getTimeQueTorce() {

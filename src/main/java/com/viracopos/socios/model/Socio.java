@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viracopos.socios.model.enums.PerfilSocio;
@@ -33,9 +32,8 @@ public class Socio implements Serializable {
 	
 	private String dataNascimento;
 	
-	@Email
 	@Column(unique=true)
-	private String email;
+	private String usuario;
 
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
@@ -43,6 +41,7 @@ public class Socio implements Serializable {
 	
 	private String timeQueTorce;
 	
+	@Column(unique=true)
 	private Integer numeroDaCamisa;
 
 	private String dataDaAssociacao;
@@ -60,17 +59,17 @@ public class Socio implements Serializable {
 		addPerfil(PerfilSocio.SOCIO);
 	}
 
-	public Socio(Integer id, String nome, String dataNascimento, String email, String timeQueTorce,
+	public Socio(Integer id, String nome, String dataNascimento, String usuario, String timeQueTorce,
 			Integer numeroDaCamisa, String dataDaAssociacao, String status, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.email = email;
+		this.usuario = usuario;
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = status;
+		this.status = "Ativo";
 		this.senha = senha;
 		addPerfil(PerfilSocio.SOCIO);
 	}
@@ -99,12 +98,12 @@ public class Socio implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public Cidade getCidade() {

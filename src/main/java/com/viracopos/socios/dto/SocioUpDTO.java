@@ -2,19 +2,40 @@ package com.viracopos.socios.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.viracopos.socios.model.Socio;
 
 public class SocioUpDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min=5, max=120, message = "O nome deve possuir entre 5 e 120 caracteres!")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataNascimento;
-	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min=4, max=12, message = "O nome de usuario deve possuir entre 4 e 12 caracteres!")
+	private String usuario;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String timeQueTorce;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Integer numeroDaCamisa;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String dataDaAssociacao;
+	
 	private String status;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String senha;
 	
 	public SocioUpDTO() {}
@@ -24,7 +45,7 @@ public class SocioUpDTO implements Serializable {
 		this.id = socio.getId();
 		this.nome = socio.getNome();
 		this.dataNascimento = socio.getDataNascimento();
-		this.email = socio.getEmail();
+		this.usuario = socio.getUsuario();
 		this.timeQueTorce = socio.getTimeQueTorce();
 		this.numeroDaCamisa = socio.getNumeroDaCamisa();
 		this.dataDaAssociacao = socio.getDataDaAssociacao();
@@ -55,12 +76,12 @@ public class SocioUpDTO implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	
 	public String getTimeQueTorce() {
