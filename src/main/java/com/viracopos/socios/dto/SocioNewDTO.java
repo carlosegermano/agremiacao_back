@@ -49,7 +49,7 @@ public class SocioNewDTO implements Serializable {
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = status;
+		this.status = (status == null) ? "Ativo" : status;
 		this.senha = senha;
 		this.cidadeId = cidadeId;
 	}

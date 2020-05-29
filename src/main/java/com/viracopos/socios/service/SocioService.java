@@ -1,5 +1,6 @@
 package com.viracopos.socios.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.viracopos.socios.dto.SocioNewDTO;
 import com.viracopos.socios.model.Cidade;
@@ -31,6 +33,9 @@ public class SocioService {
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	public Socio find(Integer id) {
 		Optional<Socio> obj = socioRepository.findById(id);
@@ -91,6 +96,10 @@ public class SocioService {
 		newObj.setNumeroDaCamisa(obj.getNumeroDaCamisa());
 		newObj.setDataDaAssociacao(obj.getDataDaAssociacao());
 		newObj.setStatus(obj.getStatus());
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 	
 }
