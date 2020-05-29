@@ -41,7 +41,7 @@ public class SocioNewDTO implements Serializable {
 	}
 	
 	public SocioNewDTO(String nome, String dataNascimento, String usuario, String timeQueTorce, Integer numeroDaCamisa,
-			String dataDaAssociacao, String senha, Integer cidadeId) {
+			String dataDaAssociacao, String status, String senha, Integer cidadeId) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -49,12 +49,10 @@ public class SocioNewDTO implements Serializable {
 		this.timeQueTorce = timeQueTorce;
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
-		this.status = "Ativo";
+		this.status = status;
 		this.senha = senha;
 		this.cidadeId = cidadeId;
 	}
-
-
 
 	public String getNome() {
 		return nome;

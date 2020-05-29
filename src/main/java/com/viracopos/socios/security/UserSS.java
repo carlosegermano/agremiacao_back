@@ -37,6 +37,10 @@ public class UserSS implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
+	
+	public boolean hasRole(PerfilSocio perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
 
 	@Override
 	public String getPassword() {

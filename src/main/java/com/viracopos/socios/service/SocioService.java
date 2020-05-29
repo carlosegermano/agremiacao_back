@@ -11,11 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.viracopos.socios.dto.SocioNewDTO;
-import com.viracopos.socios.dto.SocioUpDTO;
 import com.viracopos.socios.model.Cidade;
 import com.viracopos.socios.model.Socio;
+import com.viracopos.socios.model.enums.PerfilSocio;
 import com.viracopos.socios.repository.CidadeRepository;
 import com.viracopos.socios.repository.SocioRepository;
+import com.viracopos.socios.security.UserSS;
+import com.viracopos.socios.service.exceptions.AuthorizationException;
 import com.viracopos.socios.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -46,6 +48,12 @@ public class SocioService {
 	}
 	
 	public void deleteById(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user == null || user.getId() != id && !user.hasRole(PerfilSocio.ADMIN)) {
+			throw new AuthorizationException("Acesso negado!");
+		}
+		
 		socioRepository.deleteById(id);
 	}
 	
@@ -55,6 +63,12 @@ public class SocioService {
 	}
 	
 	public Socio update(Socio obj) {
+		
+		UserSS user = UserService.authenticated();
+		if (user == null || user.getId() != obj.getId() && !user.hasRole(PerfilSocio.ADMIN)) {
+			throw new AuthorizationException("Acesso negado!");
+		}
+		
 		Socio newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return socioRepository.save(newObj);
@@ -67,12 +81,6 @@ public class SocioService {
 		Cidade cidade = cidadeRepository.getOne(objDto.getCidadeId());
 		socio.setCidade(cidade);
 		return socio;
-	}
-	
-	public Socio fromDTO(SocioUpDTO objDto) {
-		return new Socio(objDto.getId(), objDto.getNome(), objDto.getDataNascimento(),
-				objDto.getUsuario(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
-				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
 	}
 	
 	private void updateData(Socio newObj, Socio obj) {

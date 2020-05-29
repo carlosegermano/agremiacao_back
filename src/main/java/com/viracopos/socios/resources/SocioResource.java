@@ -17,7 +17,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.viracopos.socios.dto.SocioDTO;
 import com.viracopos.socios.dto.SocioNewDTO;
-import com.viracopos.socios.dto.SocioUpDTO;
 import com.viracopos.socios.model.Socio;
 import com.viracopos.socios.service.SocioService;
 
@@ -68,7 +67,7 @@ public class SocioResource {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody SocioUpDTO objDto, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody SocioNewDTO objDto, @PathVariable Integer id) {
 		Socio obj = socioService.fromDTO(objDto);
 		obj.setId(id);
 		obj = socioService.update(obj);
