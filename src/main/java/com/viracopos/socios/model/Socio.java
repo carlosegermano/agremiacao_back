@@ -54,7 +54,7 @@ public class Socio implements Serializable {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
-	
+		
 	public Socio() {
 		addPerfil(PerfilSocio.SOCIO);
 	}
