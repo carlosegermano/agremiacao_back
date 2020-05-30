@@ -45,6 +45,9 @@ public class SocioService {
 	@Value("${img.prefix.partner.profile}")
 	private String prefix;
 	
+	@Value("${img.profile.size}")
+	private Integer size;
+	
 	public Socio find(Integer id) {
 		Optional<Socio> obj = socioRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Sócio não encontrado! Id: " + id + 
@@ -114,6 +117,8 @@ public class SocioService {
 		}
 		
 		BufferedImage jpgImage = imageService.getJPGImageFromFile(multipartFile);
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
 		String fileName = prefix + user.getId() + ".jpg";
 		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
