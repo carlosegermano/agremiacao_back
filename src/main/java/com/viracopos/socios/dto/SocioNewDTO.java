@@ -31,6 +31,8 @@ public class SocioNewDTO implements Serializable {
 	
 	private String status;
 	
+	private String cargo;
+	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String senha;
 	
@@ -41,7 +43,7 @@ public class SocioNewDTO implements Serializable {
 	}
 	
 	public SocioNewDTO(String nome, String dataNascimento, String usuario, String timeQueTorce, Integer numeroDaCamisa,
-			String dataDaAssociacao, String status, String senha, Integer cidadeId) {
+			String dataDaAssociacao, String status, String cargo, String senha, Integer cidadeId) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -50,6 +52,7 @@ public class SocioNewDTO implements Serializable {
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
 		this.status = (status == null) ? "Ativo" : status;
+		this.cargo = cargo;
 		this.senha = senha;
 		this.cidadeId = cidadeId;
 	}
@@ -108,6 +111,14 @@ public class SocioNewDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	public String getSenha() {

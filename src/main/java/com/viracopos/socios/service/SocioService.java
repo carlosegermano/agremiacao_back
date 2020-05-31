@@ -42,7 +42,7 @@ public class SocioService {
 	@Autowired
 	private ImageService imageService;
 	
-	@Value("${img.prefix.partner.profile}")
+	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	
 	@Value("${img.profile.size}")
@@ -93,7 +93,7 @@ public class SocioService {
 	public Socio fromDTO(SocioNewDTO objDto) {
 		Socio socio = new Socio(null, objDto.getNome(), objDto.getDataNascimento(),
 				objDto.getUsuario(), objDto.getTimeQueTorce(), objDto.getNumeroDaCamisa(),
-				objDto.getDataDaAssociacao(), objDto.getStatus(), pe.encode(objDto.getSenha()));
+				objDto.getDataDaAssociacao(), objDto.getStatus(), objDto.getCargo(), pe.encode(objDto.getSenha()));
 		Cidade cidade = cidadeRepository.getOne(objDto.getCidadeId());
 		socio.setCidade(cidade);
 		return socio;

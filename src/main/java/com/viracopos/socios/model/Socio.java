@@ -48,6 +48,8 @@ public class Socio implements Serializable {
 	
 	private String status;
 	
+	private String cargo;
+	
 	@JsonIgnore
 	private String senha;
 	
@@ -60,7 +62,7 @@ public class Socio implements Serializable {
 	}
 
 	public Socio(Integer id, String nome, String dataNascimento, String usuario, String timeQueTorce,
-			Integer numeroDaCamisa, String dataDaAssociacao, String status, String senha) {
+			Integer numeroDaCamisa, String dataDaAssociacao, String status, String cargo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -70,6 +72,7 @@ public class Socio implements Serializable {
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
 		this.status = status;
+		this.cargo = cargo;
 		this.senha = senha;
 		addPerfil(PerfilSocio.SOCIO);
 	}
@@ -144,6 +147,14 @@ public class Socio implements Serializable {
 	
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	public String getSenha() {

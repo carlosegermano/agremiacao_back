@@ -12,6 +12,7 @@ public class SocioDTO implements Serializable {
 	private String nome;
 	private Cidade cidade;
 	private String status;
+	private String cargo;
 	
 	public SocioDTO() {}
 	
@@ -21,6 +22,7 @@ public class SocioDTO implements Serializable {
 		this.nome = socio.getNome();
 		this.cidade = socio.getCidade();
 		this.status = socio.getStatus();
+		this.cargo = socio.getCargo();
 	}
 
 	public Integer getId() {
@@ -53,6 +55,14 @@ public class SocioDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 	
 }
