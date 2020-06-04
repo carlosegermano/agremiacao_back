@@ -34,9 +34,9 @@ public class Socio implements Serializable {
 	
 	@Column(unique=true)
 	private String usuario;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "cidade_id")
+	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
 	private String timeQueTorce;

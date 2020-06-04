@@ -123,5 +123,9 @@ public class SocioService {
 		
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}
+
+	public Socio findByUsuario(String usuario) {
+		return socioRepository.findByUsuario(usuario);
+	}
 	
 }

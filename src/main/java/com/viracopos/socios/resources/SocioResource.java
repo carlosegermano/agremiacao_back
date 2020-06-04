@@ -80,4 +80,10 @@ public class SocioResource {
 		URI uri = socioService.uploadProfilePicture(file);
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
+	public ResponseEntity<SocioDTO> findByUsuario(@RequestParam(name="value") String usuario) {
+		Socio obj = socioService.findByUsuario(usuario);
+		return ResponseEntity.ok().body(new SocioDTO(obj));
+	}
 }

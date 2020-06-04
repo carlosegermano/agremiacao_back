@@ -31,15 +31,19 @@ public class DBService {
 	
 	public void instantiateTestDatabase() {
 		
-		Estado uf = new Estado(null, "Paraíba");
+		Estado uf1 = new Estado(null, "Paraíba");
+		Estado uf2 = new Estado(null, "Rio Grande do Norte");
+		
+		Cidade cid1 = new Cidade(null, "Rio Tinto", uf1);
+		Cidade cid2 = new Cidade(null, "Mamanguape", uf1);
+		Cidade cid3 = new Cidade(null, "Natal", uf2);
 
-		estadoRepository.save(uf);
-
-		Cidade cid1 = new Cidade(1, "Rio Tinto", uf);
-		Cidade cid2 = new Cidade(2, "Mamanguape", uf);
-
-		cidadeRepository.saveAll(Arrays.asList(cid1, cid2));
-
+		uf1.getCidades().addAll(Arrays.asList(cid1, cid2));
+		uf2.getCidades().add(cid3);
+		
+		estadoRepository.saveAll(Arrays.asList(uf1, uf2));
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
+		
 		Socio s1 = new Socio(null, "Emerson Felipe", "20/04/1982", "emerson", "São Paulo", 14, "10/01/1997",
 				"Ativo", "Presidente", pe.encode("123"));
 		Socio s2 = new Socio(null, "Wellington Campos", "10/05/1985", "welliton", "Fluminense", 1,
@@ -86,10 +90,10 @@ public class DBService {
 
 		s1.setCidade(cid1);
 		s2.setCidade(cid1);
-		s3.setCidade(cid1);
-		s4.setCidade(cid1);
+		s3.setCidade(cid3);
+		s4.setCidade(cid3);
 		s5.setCidade(cid1);
-		s6.setCidade(cid1);
+		s6.setCidade(cid3);
 		s7.setCidade(cid1);
 		s8.setCidade(cid2);
 		s9.setCidade(cid1);
@@ -99,12 +103,12 @@ public class DBService {
 		s13.setCidade(cid1);
 		s14.setCidade(cid2);
 		s15.setCidade(cid2);
-		s16.setCidade(cid1);
-		s17.setCidade(cid1);
+		s16.setCidade(cid2);
+		s17.setCidade(cid2);
 		s18.setCidade(cid2);
 		s19.setCidade(cid1);
 		s20.setCidade(cid1);
-
+		
 		socioRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20));
 
 	}

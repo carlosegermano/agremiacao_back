@@ -6,11 +6,14 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.viracopos.socios.model.Cidade;
+import com.viracopos.socios.model.Estado;
+
 public class SocioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Preenchimento obrigatório!")
-	@Length(min=5, max=120, message = "O nome deve possuir entre 5 e 120 caracteres!")
+	@Length(min=5, max=120, message = "O nome deve possuir entre 5 e 20 caracteres!")
 	private String nome;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
@@ -19,6 +22,10 @@ public class SocioNewDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	@Length(min=4, max=12, message = "O nome de usuario deve possuir entre 4 e 12 caracteres!")
 	private String usuario;
+	
+	private Estado estado;
+	
+	private Cidade cidade;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String timeQueTorce;
@@ -34,6 +41,7 @@ public class SocioNewDTO implements Serializable {
 	private String cargo;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min=4, message = "A senha deve possuir no mínimo 4 caracteres!")
 	private String senha;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
@@ -52,7 +60,7 @@ public class SocioNewDTO implements Serializable {
 		this.numeroDaCamisa = numeroDaCamisa;
 		this.dataDaAssociacao = dataDaAssociacao;
 		this.status = (status == null) ? "Ativo" : status;
-		this.cargo = cargo;
+		this.cargo = (cargo == null) ? "Sócio" : cargo;
 		this.senha = senha;
 		this.cidadeId = cidadeId;
 	}
@@ -79,6 +87,22 @@ public class SocioNewDTO implements Serializable {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getTimeQueTorce() {
